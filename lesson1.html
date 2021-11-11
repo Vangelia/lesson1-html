@@ -1,35 +1,38 @@
 <html lang="eng">
-    <head>
-        <title>To do list</title>
-        <link href="styles/style.css" rel="stylesheet" type="text/css">
-        <div class="cat">
-            <div class="cat-title">
-                <h1>To do list</h1>
-            </div>
-            <br/>
-        </div>
-        <br/>
-    </head>
+<head>
+    <title>To do list</title>
+    <link href="styles/style.css" rel="stylesheet" type="text/css">
+    <script src="main/main.js"></script>
+</head>
 
-    <body>
+<body>
 
-        <div class="maindiv">
+<div class="cat">
+    <div class="cat-title">
+        <h1>To do list</h1>
+    </div>
+    <br/>
+</div>
+<br/>
 
-            <div class="childdiv">
-                <div id="inner">
-                    <input type="text" value="New list element... "/>
-                    <button type="button" title="Add">Add</button>
-                </div>
-            </div><br>
+<div class="maindiv">
 
-            <div class="childdiv">
-                <ol>
-                    <li><label><input type="checkbox"></label>Feed the potato &#10060;</li>
-                    <li><label><input type="checkbox"></label>Wash the cat 	&#10060;</li>
-                    <li><label><input type="checkbox"></label>Walk with dishes 	&#10060;</li>
-                </ol>
-            </div>
-        </div>
+    <div class="childdiv">
+        <form id="inner">
+            <input id="inputTask" type="text" placeholder="New list element... "/>
+            <button id="addButton" type="submit" title="Add">Add</button>
+        </form>
+    </div>
+    <br>
 
-    </body>
+    <div class="childdiv">
+        <ol id="list">
+<!--            <li><label><input tag="chbox" type="checkbox"></label>Feed the potato <a>&#10060;</a></li>
+            <li><label><input tag="chbox" type="checkbox"></label>Wash the cat &#10060;</li>
+            <li><label><input tag="chbox" type="checkbox"></label>Walk with dishes &#10060;</li>-->
+        </ol>
+    </div>
+</div>
+
+</body>
 </html>
