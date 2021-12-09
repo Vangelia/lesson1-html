@@ -1,18 +1,18 @@
+let items = [];
+
 document.addEventListener("DOMContentLoaded", () => {
-    let idCounter = 0;
     const form = document.getElementById("inner");
 
-    const items = loadItems();
-    listMaker(items);
+    items = loadItems();
+
+    let idCounter = items.length;
+
+    listMaker();
 
     form.addEventListener("submit", (event) => {
         event.preventDefault();
 
         let input = document.getElementById("inputTask").value;
-        let node = document.createElement("li");
-
-        node.innerHTML = `<label><input type='checkbox'></label>${input} <a id="clear${idCounter}">&#10060</a>;`;
-        node.id = idCounter;
 
         const json = {
             id : idCounter,
@@ -21,14 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         };
         saveItem(json);
 
-        document.getElementById("list").appendChild(node);
-
-        const clearButton = document.getElementById("clear" + idCounter);
-        clearButton.addEventListener("click", () => {
-            let list = document.getElementById("list");
-            list.removeChild(node);
-            localStorage.removeItem('element');
-        });
+        listMaker();
 
         idCounter+=1;
         document.getElementById("inputTask").value = "";
@@ -46,16 +39,25 @@ function loadItems() {
 }
 
 function saveItem(item) {
-    const items = loadItems();
+    items = loadItems();
     items.push(item);
     localStorage.setItem(KEY, JSON.stringify(items));
 }
 
-function listMaker(items) {
+function remover(id) {
+    items = items.filter((item) => id !== item.id);
+    localStorage.setItem(KEY, JSON.stringify(items));
+    listMaker(items);
+}
+
+
+function listMaker() {
+    document.getElementById("list").innerText = "";
     for (let item of items) {
         let node = document.createElement("li");
 
-        node.innerHTML = `<label><input type='checkbox' checked=${item.isChecked}></label>${item.input} <a id="clear${item.id}">&#10060</a>;`;
+        node.innerHTML = `<label><input type='checkbox' checked=${item.isChecked}></label>${item.input} <a id="clear${item.id}" onclick="remover(${item.id})">&#10060</a>;`;
+        node.id = item.id;
         document.getElementById("list").appendChild(node);
     }
 }
